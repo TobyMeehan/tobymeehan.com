@@ -7,7 +7,7 @@ export default function Lead() {
     return (
         <section className="text-center sm:text-left">
             <h1 className="font-extralight text-3xl">Toby Meehan</h1>
-            <p className="text-xl font-light my-2">Hi! It's me, I'm Toby.</p>
+            <p className="text-xl font-light my-2">Hi! It&apos;s me, I&apos;m Toby.</p>
             <p>
                 Interested in computer science, politics, rail and aviation;
                 recently graduated in Computer Science from the University of York.

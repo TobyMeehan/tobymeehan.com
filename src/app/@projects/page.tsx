@@ -9,7 +9,7 @@ export default function Projects() {
     return (
         <section>
 
-            <h2 className="mb-3 text-center text-2xl font-semibold">Things I've Done</h2>
+            <h2 className="mb-3 text-center text-2xl font-semibold">Things I&apos;ve Done</h2>
 
             <ul>
 

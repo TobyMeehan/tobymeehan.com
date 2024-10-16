@@ -29,7 +29,7 @@ export default function Tools() {
     return (
         <section>
 
-            <h2 className="mb-3 text-center text-2xl font-semibold">Tools I've Used</h2>
+            <h2 className="mb-3 text-center text-2xl font-semibold">Tools I&apos;ve Used</h2>
 
             <section>
                 <ul className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-3">
