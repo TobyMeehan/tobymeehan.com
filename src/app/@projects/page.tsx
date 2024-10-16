@@ -38,7 +38,7 @@ export default function Projects() {
                     Full stack file hosting web application.
                     <div className="flex flex-col sm:flex-row gap-3 mt-3">
                         <GitHubButton href="https://github.com/TobyMeehan/Website" />
-                        <SiteButton href="https://www.cloud.cloud2.tobymeehan.com/downloads" />
+                        <SiteButton href="https://downloads.tobymeehan.com/downloads" />
                     </div>
                 </li>
 
