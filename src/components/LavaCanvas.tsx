@@ -6,6 +6,8 @@ import { createNoise2D } from "simplex-noise"
 const simplex = createNoise2D()
 
 type Blob = {
+    radius: number
+
     speedX: number
     speedY: number
 
@@ -44,7 +46,7 @@ export default function LavaCanvas() {
         let width = canvas.width = window.innerWidth * window.devicePixelRatio
         let height = canvas.height = window.innerHeight * window.devicePixelRatio
 
-        window.addEventListener("resize", event => {
+        window.addEventListener("resize", () => {
             width = canvas.width = window.innerWidth * window.devicePixelRatio
             height = canvas.height = window.innerHeight * window.devicePixelRatio
         })
@@ -99,16 +101,18 @@ function moveBlobs(blobs: Blob[], width: number, height: number, mouseSpeedX: nu
 
             // Apply speeds
 
-            point.originX += blob.speedX + (mouseSpeedX / 50)
-            point.originY -= blob.speedY - (mouseSpeedY / 25)
+            point.originX += blob.speedX + (mouseSpeedX / 75)
+            point.originY -= blob.speedY - (mouseSpeedY / 40)
 
             // Apply animation
 
             const nX = simplex(point.noiseOffsetX, point.noiseOffsetX)
             const nY = simplex(point.noiseOffsetY, point.noiseOffsetY)
 
-            const x = mapRange(nX, { start: -1, end: 1 }, { start: point.originX - 20, end: point.originX + 20 })
-            const y = mapRange(nY, { start: -1, end: 1 }, { start: point.originY - 20, end: point.originY + 20 })
+            const factor = (blob.radius / 4)**2
+
+            const x = mapRange(nX, { start: -1, end: 1 }, { start: point.originX - factor, end: point.originX + factor })
+            const y = mapRange(nY, { start: -1, end: 1 }, { start: point.originY - factor, end: point.originY + factor })
 
             point.x = x
             point.y = y
@@ -123,7 +127,7 @@ function moveBlobs(blobs: Blob[], width: number, height: number, mouseSpeedX: nu
 
         blob.hueNoiseOffset += noiseStep / 6
 
-        if (blob.points.every(point => point.originY < 0)) {
+        if (blob.points.every(point => point.y < -20)) {
             const newBlob = generateBlob(width, height, true)
 
             blob.points = newBlob.points
@@ -143,14 +147,14 @@ function mapRange(
 }
 
 function generateBlob(width: number, height: number, spawnAtBottom?: boolean): Blob {
-    const radius = 50 + Math.random() * 200
+    const radius = 60 + Math.random() * 200
 
     const x = Math.random() * width
     const y = spawnAtBottom ? height + radius : Math.random() * height
 
     const points: BlobPoint[] = []
 
-    for (let j = 0; j < 6; j++) {
+    for (let j = 0; j < Math.floor(radius / 10); j++) {
         const theta = j * (Math.PI * 2) / 6
 
         const pointX = x + Math.cos(theta) * radius
@@ -169,6 +173,8 @@ function generateBlob(width: number, height: number, spawnAtBottom?: boolean): B
     }
 
     return {
+        radius,
+
         speedX: 0,
         speedY: .6 - (radius / 1000),
 
@@ -211,8 +217,8 @@ function drawBlobs(context: CanvasRenderingContext2D, blobs: Blob[]) {
         const gradient = context.createLinearGradient(
             blob.points[0].x,
             blob.points[0].y,
-            blob.points[3].x,
-            blob.points[3].y,
+            blob.points[Math.round(blob.points.length / 2)].x,
+            blob.points[Math.round(blob.points.length / 2)].y,
         )
 
         gradient.addColorStop(0, `hsl(${blob.hue}, 100%, 17%)`)
