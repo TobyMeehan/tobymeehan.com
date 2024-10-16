@@ -22,7 +22,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5.5.1
         with:
-          images: ghcr.io/TobyMeehan/tobymeehan.com
+          images: ghcr.io/${{ github.repository }}
 
       - name: Build and Push
         uses: docker/build-push-action@v6.9.0
