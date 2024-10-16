@@ -95,7 +95,7 @@ export default function LavaCanvas() {
 
 function moveBlobs(blobs: Blob[], width: number, height: number, mouseSpeedX: number, mouseSpeedY: number) {
     blobs.forEach(blob => {
-        const noiseStep = .005
+        const noiseStep = .0025
 
         blob.points.forEach(point => {
 
@@ -109,7 +109,7 @@ function moveBlobs(blobs: Blob[], width: number, height: number, mouseSpeedX: nu
             const nX = simplex(point.noiseOffsetX, point.noiseOffsetX)
             const nY = simplex(point.noiseOffsetY, point.noiseOffsetY)
 
-            const factor = (blob.radius / 4)**2
+            const factor = blob.radius / 4
 
             const x = mapRange(nX, { start: -1, end: 1 }, { start: point.originX - factor, end: point.originX + factor })
             const y = mapRange(nY, { start: -1, end: 1 }, { start: point.originY - factor, end: point.originY + factor })
@@ -154,7 +154,7 @@ function generateBlob(width: number, height: number, spawnAtBottom?: boolean): B
 
     const points: BlobPoint[] = []
 
-    for (let j = 0; j < Math.floor(radius / 10); j++) {
+    for (let j = 0; j < 6; j++) {
         const theta = j * (Math.PI * 2) / 6
 
         const pointX = x + Math.cos(theta) * radius
@@ -176,7 +176,7 @@ function generateBlob(width: number, height: number, spawnAtBottom?: boolean): B
         radius,
 
         speedX: 0,
-        speedY: .6 - (radius / 1000),
+        speedY: .5 - (radius / 1000),
 
         points: points,
 
