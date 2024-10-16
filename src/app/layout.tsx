@@ -30,8 +30,10 @@ export default function RootLayout({
 
         <div className="min-h-screen flex flex-col bg-dark-850 text-light">
 
+          <LavaCanvas />
+
           <div className="container flex flex-col xl:max-w-7xl sm:mx-auto z-10">
-            <div className="p-8 my-4 md:my-52 md:max-w-xl rounded-lg bg-dark-850 bg-opacity-50">
+            <div className="p-8 md:my-52 md:max-w-xl rounded-lg bg-dark-850 bg-opacity-50">
               {lead}
             </div>
 
