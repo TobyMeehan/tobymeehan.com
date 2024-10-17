@@ -172,6 +172,16 @@ function generateBlob(width: number, height: number, spawnAtBottom?: boolean): B
         })
     }
 
+    // Randomise rotation
+
+    for (let j = 0; j < Math.floor(Math.random() * 6); j++) {
+        const point = points.pop()
+
+        if (point) {
+            points.unshift(point)
+        }
+    }
+
     return {
         radius,
 
@@ -188,16 +198,16 @@ function generateBlob(width: number, height: number, spawnAtBottom?: boolean): B
 function drawBlobs(context: CanvasRenderingContext2D, blobs: Blob[]) {
     blobs.forEach(blob => {
 
+        context.shadowColor = "#000000"
+        context.shadowBlur = 10
+        context.shadowOffsetX = 5
+        context.shadowOffsetY = 5
+
         const tension = .4
 
         const points = blob.points.concat([])
 
         const controlPoints = getControlPoints(points, tension)
-
-        context.shadowColor = "#000000"
-        context.shadowBlur = 10
-        context.shadowOffsetX = 5
-        context.shadowOffsetY = 5
 
         context.beginPath()
         context.moveTo(points[0].x, points[0].y)
@@ -214,11 +224,14 @@ function drawBlobs(context: CanvasRenderingContext2D, blobs: Blob[]) {
 
         }
 
+        const gradientStart = 0
+        const gradientEnd = Math.floor(blob.points.length / 2)
+
         const gradient = context.createLinearGradient(
-            blob.points[0].x,
-            blob.points[0].y,
-            blob.points[Math.round(blob.points.length / 2)].x,
-            blob.points[Math.round(blob.points.length / 2)].y,
+            blob.points[gradientStart].x,
+            blob.points[gradientStart].y,
+            blob.points[gradientEnd].x,
+            blob.points[gradientEnd].y,
         )
 
         gradient.addColorStop(0, `hsl(${blob.hue}, 100%, 17%)`)
