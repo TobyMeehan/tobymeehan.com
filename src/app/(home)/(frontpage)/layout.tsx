@@ -1,3 +1,7 @@
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
+
 export default function Layout({
     children,
     lead,
@@ -33,13 +37,14 @@ export default function Layout({
                     <div className="my-5 flex flex-col md:flex-row justify-center items-center">
 
                         <div>
-                            &copy; {new Date().getFullYear()} Absolutely Nobody
+                            &copy; {new Date().getFullYear()} Toby Meehan
                         </div>
 
                         <div className="hidden md:block h-6 border-r border-dark-700 mx-3"></div>
 
                         <div>
-                            This page is licensed under GNU AGPLv3
+                            <FontAwesomeIcon icon={faGithub} />
+                            <Link className="ml-2 transition text-link hover:text-link-hover hover:underline" href="https://github.com/TobyMeehan/tobymeehan.com">View Page Source</Link>
                         </div>
 
                     </div>
