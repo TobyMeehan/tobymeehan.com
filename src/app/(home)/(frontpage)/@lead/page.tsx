@@ -12,29 +12,29 @@ export default function Lead() {
                 Interested in computer science, politics, rail and aviation;
                 recently graduated in Computer Science from the University of York.
             </p>
-            <ul className="flex flex-row justify-center gap-3 mt-4 text-4xl">
+            <ul className="flex flex-row justify-center gap-3 mt-4 text-4xl text-gray-800 dark:text-bright">
                 <li>
-                    <Link className="text-bright hover:text-light transition" href="https://www.linkedin.com/in/toby-meehan/" aria-label="LinkedIn">
+                    <Link className="hover:text-gray-700 dark:hover:text-light transition" href="https://www.linkedin.com/in/toby-meehan/" aria-label="LinkedIn">
                         <FontAwesomeIcon icon={faLinkedin} />
                     </Link>
                 </li>
                 <li>
-                    <Link className="text-bright hover:text-light transition" href="https://github.com/TobyMeehan" aria-label="GitHub">
+                    <Link className="hover:text-gray-700 dark:hover:text-light transition" href="https://github.com/TobyMeehan" aria-label="GitHub">
                         <FontAwesomeIcon icon={faGithub} />
                     </Link>
                 </li>
                 <li>
-                    <Link className="text-bright hover:text-light transition" href="mailto:contact@tobymeehan.com" aria-label="Email">
+                    <Link className="hover:text-gray-700 dark:hover:text-light transition" href="mailto:contact@tobymeehan.com" aria-label="Email">
                         <FontAwesomeIcon icon={faEnvelope} />
                     </Link>
                 </li>
                 <li>
-                    <Link className="text-bright hover:text-light transition" href="https://www.instagram.com/toby.meehan/" aria-label="Instagram">
+                    <Link className="hover:text-gray-700 dark:hover:text-light transition" href="https://www.instagram.com/toby.meehan/" aria-label="Instagram">
                         <FontAwesomeIcon icon={faInstagram} />
                     </Link>
                 </li>
                 <li>
-                    <Link className="text-bright hover:text-light transition" href="https://discord.com/users/253552918030974977" aria-label="Discord">
+                    <Link className="hover:text-gray-700 dark:hover:text-light transition" href="https://discord.com/users/253552918030974977" aria-label="Discord">
                         <FontAwesomeIcon icon={faDiscord} />
                     </Link>
                 </li>
