@@ -23,7 +23,7 @@ export default function Layout({
                 {lead}
             </div>
 
-            <div className="px-8 pt-8 md:rounded-t transition bg-gray-400 dark:bg-dark-800 text-sm sm:text-base">
+            <div className="px-8 pt-8 md:rounded-t-lg md:shadow-xl transition bg-gray-400 dark:bg-dark-800 text-sm sm:text-base">
 
                 <main className="flex-grow">
                     {children}
