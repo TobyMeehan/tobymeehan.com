@@ -1,7 +1,9 @@
 import { faDiscord, faGithub, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Url } from "next/dist/shared/lib/router/router";
 import Link from "next/link";
+import { ReactNode } from "react";
 
 export default function Lead() {
     return (
@@ -12,33 +14,43 @@ export default function Lead() {
                 Interested in computer science, politics, rail and aviation;
                 recently graduated in Computer Science from the University of York.
             </p>
-            <ul className="flex flex-row justify-center gap-3 mt-4 text-4xl">
+            <ul className="flex flex-row justify-center mt-4 text-4xl text-gray-800 dark:text-bright">
                 <li>
-                    <Link className="text-bright hover:text-light transition" href="https://www.linkedin.com/in/toby-meehan/" aria-label="LinkedIn">
+                    <SocialLink href="https://www.linkedin.com/in/toby-meehan/" label="LinkedIn">
                         <FontAwesomeIcon icon={faLinkedin} />
-                    </Link>
+                    </SocialLink>
                 </li>
                 <li>
-                    <Link className="text-bright hover:text-light transition" href="https://github.com/TobyMeehan" aria-label="GitHub">
+                    <SocialLink href="https://github.com/TobyMeehan" label="GitHub">
                         <FontAwesomeIcon icon={faGithub} />
-                    </Link>
+                    </SocialLink>
                 </li>
                 <li>
-                    <Link className="text-bright hover:text-light transition" href="mailto:contact@tobymeehan.com" aria-label="Email">
+                    <SocialLink href="mailto:contact@tobymeehan.com" label="Email">
                         <FontAwesomeIcon icon={faEnvelope} />
-                    </Link>
+                    </SocialLink>
                 </li>
                 <li>
-                    <Link className="text-bright hover:text-light transition" href="https://www.instagram.com/toby.meehan/" aria-label="Instagram">
+                    <SocialLink href="https://www.instagram.com/toby.meehan/" label="Instagram">
                         <FontAwesomeIcon icon={faInstagram} />
-                    </Link>
+                    </SocialLink>
                 </li>
                 <li>
-                    <Link className="text-bright hover:text-light transition" href="https://discord.com/users/253552918030974977" aria-label="Discord">
+                    <SocialLink href="https://discord.com/users/253552918030974977" label="Discord">
                         <FontAwesomeIcon icon={faDiscord} />
-                    </Link>
+                    </SocialLink>
                 </li>
             </ul>
         </section>
+    )
+}
+
+function SocialLink({ children, href, label }: { children: ReactNode, href: Url, label: string }) {
+    return (
+        <Link className="flex w-14 h-14 justify-center items-center rounded transition
+        hover:bg-gray-400 hover:bg-opacity-60 hover:text-gray-700 
+        dark:hover:bg-dark-900 dark:hover:bg-opacity-60 dark:hover:text-light" href={href} aria-label={label}>
+            {children}
+        </Link>
     )
 }

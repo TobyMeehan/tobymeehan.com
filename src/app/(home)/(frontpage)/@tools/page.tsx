@@ -65,7 +65,7 @@ export default function Tools() {
                 </ul>
             </section>
 
-            <hr className="border-dark-700 my-5" />
+            <hr className="border-gray-500 dark:border-dark-700 my-5" />
 
             <section>
                 <ul className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-3">

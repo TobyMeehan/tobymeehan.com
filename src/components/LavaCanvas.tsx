@@ -123,7 +123,7 @@ function moveBlobs(blobs: Blob[], width: number, height: number, mouseSpeedX: nu
         })
 
         const nHue = simplex(blob.hueNoiseOffset, blob.hueNoiseOffset)
-        blob.hue = mapRange(nHue, { start: -1, end: 1 }, { start: 225, end: 345 })
+        blob.hue = mapRange(nHue, { start: -1, end: 1 }, { start: 225, end: 315 })
 
         blob.hueNoiseOffset += noiseStep / 6
 
@@ -172,6 +172,16 @@ function generateBlob(width: number, height: number, spawnAtBottom?: boolean): B
         })
     }
 
+    // Randomise rotation
+
+    for (let j = 0; j < Math.floor(Math.random() * 6); j++) {
+        const point = points.pop()
+
+        if (point) {
+            points.unshift(point)
+        }
+    }
+
     return {
         radius,
 
@@ -188,37 +198,44 @@ function generateBlob(width: number, height: number, spawnAtBottom?: boolean): B
 function drawBlobs(context: CanvasRenderingContext2D, blobs: Blob[]) {
     blobs.forEach(blob => {
 
+        context.shadowColor = "#000000"
+        context.shadowBlur = 10
+        context.shadowOffsetX = 5
+        context.shadowOffsetY = 5
+
         const tension = .4
 
         const points = blob.points.concat([])
 
         const controlPoints = getControlPoints(points, tension)
 
-        context.shadowColor = "#000000"
-        context.shadowBlur = 10
-        context.shadowOffsetX = 5
-        context.shadowOffsetY = 5
-
         context.beginPath()
         context.moveTo(points[0].x, points[0].y)
 
-        for (let i = 0; i < blob.points.length; i++) {
+        const nPoints = blob.points.length
 
-            const current = points[i]
-            const next = points[i + 1] ?? blob.points[0]
+        for (let i = 0; i < nPoints; i++) {
 
-            const cp1 = controlPoints.find(x => x.point === current)?.cp2
-            const cp2 = controlPoints.find(x => x.point === next)?.cp1
+            const nextIndex = i + 1 < nPoints ? i + 1 : 0
+
+            const cp1 = controlPoints[i].cp2
+            const cp2 = controlPoints[nextIndex].cp1
+
+            const next = points[nextIndex]
 
             context.bezierCurveTo(cp1!.x, cp1!.y, cp2!.x, cp2!.y, next.x, next.y)
 
         }
 
+        const gradientStart = 0
+        const gradientEnd = Math.floor(blob.points.length / 2)
+
         const gradient = context.createLinearGradient(
-            blob.points[0].x,
-            blob.points[0].y,
-            blob.points[Math.round(blob.points.length / 2)].x,
-            blob.points[Math.round(blob.points.length / 2)].y,
+            blob.points[gradientStart].x,
+            blob.points[gradientStart].y,
+
+            blob.points[gradientEnd].x,
+            blob.points[gradientEnd].y,
         )
 
         gradient.addColorStop(0, `hsl(${blob.hue}, 100%, 17%)`)
@@ -231,11 +248,13 @@ function drawBlobs(context: CanvasRenderingContext2D, blobs: Blob[]) {
 }
 
 function getControlPoints(points: BlobPoint[], tension: number) {
-    const controlPoints: { point: BlobPoint, cp1: Point, cp2: Point }[] = []
+    const controlPoints: { cp1: Point, cp2: Point }[] = []
 
-    for (let i = 0; i < points.length; i++) {
+    const n = points.length
 
-        const p0 = points[i - 1] ?? points[points.length - 1]
+    for (let i = 0; i < n; i++) {
+
+        const p0 = points[i - 1] ?? points[n - 1]
         const p1 = points[i]
         const p2 = points[i + 1] ?? points[0]
 
@@ -255,7 +274,7 @@ function getControlPoints(points: BlobPoint[], tension: number) {
             y: p1.y + scalingFactorB * (p2.y - p0.y)
         }
 
-        controlPoints.push({ point: p1, cp1, cp2 })
+        controlPoints.push({ cp1, cp2 })
     }
 
     return controlPoints
