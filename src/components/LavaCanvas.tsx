@@ -123,7 +123,7 @@ function moveBlobs(blobs: Blob[], width: number, height: number, mouseSpeedX: nu
         })
 
         const nHue = simplex(blob.hueNoiseOffset, blob.hueNoiseOffset)
-        blob.hue = mapRange(nHue, { start: -1, end: 1 }, { start: 225, end: 345 })
+        blob.hue = mapRange(nHue, { start: -1, end: 1 }, { start: 225, end: 315 })
 
         blob.hueNoiseOffset += noiseStep / 6
 
@@ -212,13 +212,16 @@ function drawBlobs(context: CanvasRenderingContext2D, blobs: Blob[]) {
         context.beginPath()
         context.moveTo(points[0].x, points[0].y)
 
-        for (let i = 0; i < blob.points.length; i++) {
+        const nPoints = blob.points.length
 
-            const current = points[i]
-            const next = points[i + 1] ?? blob.points[0]
+        for (let i = 0; i < nPoints; i++) {
 
-            const cp1 = controlPoints.find(x => x.point === current)?.cp2
-            const cp2 = controlPoints.find(x => x.point === next)?.cp1
+            const nextIndex = i + 1 < nPoints ? i + 1 : 0
+
+            const cp1 = controlPoints[i].cp2
+            const cp2 = controlPoints[nextIndex].cp1
+
+            const next = points[nextIndex]
 
             context.bezierCurveTo(cp1!.x, cp1!.y, cp2!.x, cp2!.y, next.x, next.y)
 
@@ -230,6 +233,7 @@ function drawBlobs(context: CanvasRenderingContext2D, blobs: Blob[]) {
         const gradient = context.createLinearGradient(
             blob.points[gradientStart].x,
             blob.points[gradientStart].y,
+
             blob.points[gradientEnd].x,
             blob.points[gradientEnd].y,
         )
@@ -244,11 +248,13 @@ function drawBlobs(context: CanvasRenderingContext2D, blobs: Blob[]) {
 }
 
 function getControlPoints(points: BlobPoint[], tension: number) {
-    const controlPoints: { point: BlobPoint, cp1: Point, cp2: Point }[] = []
+    const controlPoints: { cp1: Point, cp2: Point }[] = []
 
-    for (let i = 0; i < points.length; i++) {
+    const n = points.length
 
-        const p0 = points[i - 1] ?? points[points.length - 1]
+    for (let i = 0; i < n; i++) {
+
+        const p0 = points[i - 1] ?? points[n - 1]
         const p1 = points[i]
         const p2 = points[i + 1] ?? points[0]
 
@@ -268,7 +274,7 @@ function getControlPoints(points: BlobPoint[], tension: number) {
             y: p1.y + scalingFactorB * (p2.y - p0.y)
         }
 
-        controlPoints.push({ point: p1, cp1, cp2 })
+        controlPoints.push({ cp1, cp2 })
     }
 
     return controlPoints
