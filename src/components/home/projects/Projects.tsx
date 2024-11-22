@@ -1,5 +1,5 @@
-import GitHubButton from "@/components/GitHubButton";
-import SiteButton from "@/components/SiteButton";
+import GitHubButton from "../GitHubButton";
+import SiteButton from "../SiteButton";
 import Image from "next/image";
 
 import cloud from "./cloud.svg"

@@ -7,7 +7,7 @@ import { ReactNode } from "react";
 
 export default function Lead() {
     return (
-        <section className="text-center sm:text-left">
+        <section className="p-8 md:my-52 md:max-w-xl md:rounded-2xl transition bg-neutral-300 bg-opacity-65 dark:bg-dark-850 dark:bg-opacity-50 text-center sm:text-left">
             <h1 className="font-extralight text-3xl">Toby Meehan</h1>
             <p className="text-xl font-light my-2">Hi! It&apos;s me, I&apos;m Toby.</p>
             <p>
