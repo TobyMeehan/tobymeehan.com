@@ -1,4 +1,10 @@
+import { Metadata } from "next";
 import Shrek from "./Shrek";
+
+export const metadata: Metadata = {
+    title: "Shrek",
+    description: "Shrek"
+}
 
 export default function Page() {
 
