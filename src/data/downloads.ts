@@ -18,7 +18,7 @@ export async function fetchPublicDownloads(): Promise<{
     }
 }
 
-export async function fetchDownloadById(id: string, session?: Session): Promise<{
+export async function fetchDownloadById(id: string, session?: Session | null): Promise<{
     status: "success",
     download: Download
 } | {
