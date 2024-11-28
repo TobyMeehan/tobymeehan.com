@@ -32,6 +32,22 @@ const config: Config = {
           DEFAULT: '#0284c7',
           hover: '#0369a1'
         },
+
+        'positive': {
+          DEFAULT: '#16a34a',
+          hover: '#15803d',
+          dark: '#166534'
+        },
+        'negative': {
+          DEFAULT: '#dc2626',
+          hover: '#b91c1c',
+          dark: '#991b1b'
+        },
+        'cautious': {
+          DEFAULT: '#ca8a04',
+          hover: '#a16207',
+          dark: '#854d0e'
+        }
         
       },
     },
