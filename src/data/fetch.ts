@@ -55,7 +55,7 @@ type ValidationError = {
     reason: string
 }
 
-export async function getBackend<T>(path: string, session?: Session, init?: RequestInit): Promise<DataFetchResult<T>> {
+export async function getBackend<T>(path: string, session?: Session | null, init?: RequestInit): Promise<DataFetchResult<T>> {
     const response = await fetchBackend(path, session, undefined, { ...init, method: "GET" })
 
     if (response.status === 200) {
@@ -68,7 +68,7 @@ export async function getBackend<T>(path: string, session?: Session, init?: Requ
     return response as FailedResult
 }
 
-export async function postBackend<T>(path: string, session?: Session, body?: any, init?: RequestInit): Promise<DataFetchResult<T>> {
+export async function postBackend<T>(path: string, session?: Session | null, body?: any, init?: RequestInit): Promise<DataFetchResult<T>> {
     const response = await fetchBackend(path, session, body, { ...init, method: "POST" })
 
     if (response.status === 201) {
@@ -81,7 +81,7 @@ export async function postBackend<T>(path: string, session?: Session, body?: any
     return response as FailedResult
 }
 
-export async function patchBackend<T>(path: string, session: Session, body?: any, init?: RequestInit): Promise<DataFetchResult<T>> {
+export async function patchBackend<T>(path: string, session?: Session | null, body?: any, init?: RequestInit): Promise<DataFetchResult<T>> {
     const response = await fetchBackend(path, session, body, { ...init, method: "PATCH" })
 
     if (response.status === 200) {
@@ -94,7 +94,7 @@ export async function patchBackend<T>(path: string, session: Session, body?: any
     return response as FailedResult
 }
 
-export async function putBackend<T>(path: string, session: Session, body?: any, init?: RequestInit): Promise<DataFetchResult<T>> {
+export async function putBackend<T>(path: string, session?: Session | null, body?: any, init?: RequestInit): Promise<DataFetchResult<T>> {
     const response = await fetchBackend(path, session, body, { ...init, method: "PUT" })
 
     if (response.status === 200) {
@@ -107,13 +107,13 @@ export async function putBackend<T>(path: string, session: Session, body?: any, 
     return response as FailedResult
 }
 
-export async function deleteBackend(path: string, session: Session, init?: RequestInit) {
+export async function deleteBackend(path: string, session?: Session | null, init?: RequestInit) {
     const response = await fetchBackend(path, session, undefined, { ...init, method: "DELETE" })
 
     return response
 }
 
-async function fetchBackend(path: string, session?: Session, body?: any, init?: RequestInit): Promise<FetchResult> {
+async function fetchBackend(path: string, session?: Session | null, body?: any, init?: RequestInit): Promise<FetchResult> {
     let headers: HeadersInit = {
         ...init?.headers
     }
@@ -143,10 +143,14 @@ async function fetchBackend(path: string, session?: Session, body?: any, init?: 
 
         const data = await response.json()
 
-        return response.ok ? {
+        if (!response.ok) {
+            return data
+        }
+
+        return {
             status: response.status as SuccessStatus,
             data: data
-        } : data
+        }
 
     } catch (error) {
 

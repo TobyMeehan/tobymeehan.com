@@ -1,1 +1,3 @@
-export const DefaultSidebar = () => <></>
+const DefaultSidebar = () => <></>
+
+export default DefaultSidebar
