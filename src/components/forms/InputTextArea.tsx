@@ -10,7 +10,7 @@ export default function InputTextArea({ valid, className, ...props }: InputTextA
             className={`appearance-none
             w-full py-1.5 px-3
             rounded
-            text-light
+            text-light placeholder:opacity-65
             bg-dark-900
             transition
             shadow-md

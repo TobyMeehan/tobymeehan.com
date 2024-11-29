@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import CommentSection from "@/components/downloads/comments/CommentSection";
 import { fetchDownloadById } from "@/data/downloads";
 import { Metadata, ResolvingMetadata } from "next";
 
@@ -39,6 +40,10 @@ export default async function DownloadPage({ params }: Props) {
                     <hr className="border-dark-700 my-5" />
 
                     {result.download.description}
+
+                    <hr className="border-dark-700 my-5" />
+
+                    <CommentSection download={result.download} />
                 </>
             )
         case "forbidden":
