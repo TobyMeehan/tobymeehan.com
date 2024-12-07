@@ -27,10 +27,15 @@ type FailedResult =
     | NotFoundResult
     | ServerErrorResult
     | ExceptionResult
+    | UnauthorizedResult
 
 type BadRequestResult = {
     status: 400
     errors: ValidationError[]
+}
+
+type UnauthorizedResult = {
+    status: 401
 }
 
 type ForbiddenResult = {

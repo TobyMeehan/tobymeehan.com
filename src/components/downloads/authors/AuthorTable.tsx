@@ -4,6 +4,8 @@ import { DateTime } from "luxon"
 import { Suspense } from "react"
 import UserInfo from "./UserInfo"
 import AuthorActionsForm from "./AuthorActionsForm"
+import Table from "@/components/tables/Table"
+import TableRow from "@/components/tables/TableRow"
 
 export interface AuthorTableProps {
     downloadId: string
@@ -11,21 +13,18 @@ export interface AuthorTableProps {
 
 export default function AuthorTable({ downloadId }: AuthorTableProps) {
     return (
-        <table className="w-full table-auto bg-dark-900 rounded-lg overflow-hidden shadow-lg border-dark-700">
-            <thead className="border-b border-dark-700">
-                <tr>
-                    <td className="p-5 font-bold">User</td>
-                    <td className="p-5 font-bold">Added</td>
-                    <td className="p-5 font-bold">Role</td>
-                    <td className="p-5 font-bold">Actions</td>
-                </tr>
-            </thead>
-            <tbody>
-                <Suspense>
-                    <AuthorTableAsync downloadId={downloadId} />
-                </Suspense>
-            </tbody>
-        </table>
+        <Table head={
+            <>
+                <th className="text-left p-5 font-bold">User</th>
+                <th className="text-left py-5 font-bold">Added</th>
+                <th className="text-left py-5 font-bold">Role</th>
+                <th className="text-left py-5 font-bold">Actions</th>
+            </>
+        }>
+            <Suspense>
+                <AuthorTableAsync downloadId={downloadId} />
+            </Suspense>
+        </Table>
     )
 }
 
@@ -48,18 +47,18 @@ async function AuthorTableAsync({ downloadId }: AuthorTableProps) {
 
     return result.authors.map(author => {
         return (
-            <tr className="transition hover:bg-dark-950">
+            <TableRow>
                 <td className="p-3">
                     <UserInfo author={author} />
                 </td>
-                <td className="p-3">
+                <td className="py-3">
                     {DateTime.fromISO(author.createdAt).toRelative()}
                 </td>
-                <td className="p-3">{author.isOwner ? <>Owner</> : <>Author</>}</td>
-                <td className="p-1.5">
+                <td className="py-3">{author.isOwner ? <>Owner</> : <>Author</>}</td>
+                <td className="py-1.5">
                     <AuthorActionsForm downloadId={downloadId} author={author} />
                 </td>
-            </tr>
+            </TableRow>
         )
     })
 }
