@@ -6,12 +6,12 @@ export interface InputDropdownProps {
     id?: string
     name?: string
     options: { value: string, label: ReactNode }[]
-    defaultOption?: number
+    defaultValue?: string
 }
 
-export default function InputDropdown({ id, name, options, defaultOption }: InputDropdownProps) {
+export default function InputDropdown({ id, name, options, defaultValue }: InputDropdownProps) {
     const [showDropdown, setShowDropdown] = useState(false)
-    const [currentOption, setCurrentOption] = useState(options[defaultOption ?? 0])
+    const [currentOption, setCurrentOption] = useState(options.find(x => x.value === defaultValue) ?? options[0])
 
     const dropdownRef = useRef<HTMLDivElement>(null)
 
@@ -33,8 +33,8 @@ export default function InputDropdown({ id, name, options, defaultOption }: Inpu
                 className={`${showDropdown ? "bg-dark-950" : "bg-dark-900"} flex items-center w-full py-1.5 pl-3 pr-1 rounded text-lg text-light transition focus:bg-dark-950 shadow-md hover:bg-dark-950 hover:shadow-none hover:cursor-pointer`}>
                 <input name={name} type="hidden" value={currentOption.value} />
                 {currentOption.label}
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" 
-                className="ml-auto size-6">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+                    className="ml-auto size-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
                 </svg>
             </button>

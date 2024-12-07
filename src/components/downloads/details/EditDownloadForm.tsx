@@ -52,7 +52,7 @@ export default function EditDownloadForm({ download }: { download: Download }) {
             <div className="mb-3">
                 <label htmlFor="visibility" className="block mb-1.5">Visibility</label>
 
-                <InputDropdown id="visibility" name="visibility" options={[
+                <InputDropdown id="visibility" name="visibility" defaultValue={download.visibility} options={[
                     {
                         value: "public", label: (
                             <div className="flex items-center gap-2">
