@@ -2,6 +2,8 @@ import { fetchAuthorsByDownload } from "@/data/authors";
 import { Download } from "@/models/Download";
 import Image from "next/image";
 import { Suspense } from "react";
+import UserLink from "../users/UserLink";
+import Avatar from "../users/Avatar";
 
 export default function AuthorSummary({ download }: { download: Download }) {
     return (
@@ -17,11 +19,10 @@ async function AuthorSummaryAsync({ download }: { download: Download }) {
     switch (result.status) {
         case "success":
             return (
-                <div className="flex">
+                <div className="flex gap-2">
                     {result.authors.map(author => {
                         return (
-                            <Image key={author.id} src={`https://thavyra.xyz/api/users/${author.id}/avatar.png`} alt="Avatar"
-                            width={500} height={500} className="size-7" />
+                            <Avatar key={author.id} user={{ id: author.id, username: "" }} className="size-7" />
                         )
                     })}
                 </div>

@@ -1,8 +1,8 @@
 import { auth } from "@/auth";
+import Avatar from "@/components/users/Avatar";
+import UserLink from "@/components/users/UserLink";
 import { fetchUserById } from "@/data/users";
 import { Author } from "@/models/Author";
-import Image from "next/image";
-import Link from "next/link";
 import { Suspense } from "react";
 
 export interface UserInfoProps {
@@ -40,14 +40,13 @@ async function UserInfoAsync({ author }: UserInfoProps) {
     }
 
     return (
-        <Link href={`https://thavyra.xyz/@${result.user.username}`}
+        <UserLink user={result.user}
             className="flex items-center w-auto p-2 rounded transition bg-opacity-20 hover:bg-dark-700 hover:shadow-md active:bg-dark-750">
-            <Image src={`https://thavyra.xyz/api/users/${result.user.id}/avatar.png`} alt={`${result.user.username} Avatar`}
-                width={500} height={500} className="size-7 rounded-full mr-2" />
+            <Avatar user={result.user} className="size-7 mr-2" />
             <div className="text-bright font-semibold">
                 {result.user.username}
             </div>
-        </Link>
+        </UserLink>
     )
 }
 
