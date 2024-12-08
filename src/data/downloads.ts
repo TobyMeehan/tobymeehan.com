@@ -41,3 +41,19 @@ export async function fetchDownloadById(id: string, session?: Session | null): P
             return { status: "failed" }
     }
 }
+
+export async function fetchUserDownloads(session: Session): Promise<{
+    status: "success",
+    downloads: Download[]
+} | {
+    status: "failed"
+}> {
+    const response = await getBackend<Download[]>(`/authors/@me/downloads`, session)
+
+    switch (response.status) {
+        case 200:
+            return { status: "success", downloads: response.data }
+        default:
+            return { status: "failed" }
+    }
+}

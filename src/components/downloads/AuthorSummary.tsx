@@ -22,7 +22,7 @@ async function AuthorSummaryAsync({ download }: { download: Download }) {
                 <div className="flex gap-2">
                     {result.authors.map(author => {
                         return (
-                            <Avatar key={author.id} user={{ id: author.id, username: "" }} className="size-7" />
+                            <Avatar key={author.id} userId={author.id} className="size-7" />
                         )
                     })}
                 </div>

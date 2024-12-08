@@ -41,8 +41,8 @@ async function UserInfoAsync({ author }: UserInfoProps) {
 
     return (
         <UserLink user={result.user}
-            className="flex items-center w-auto p-2 rounded transition bg-opacity-20 hover:bg-dark-700 hover:shadow-md active:bg-dark-750">
-            <Avatar user={result.user} className="size-7 mr-2" />
+            className="flex max-w-max items-center p-2 rounded transition bg-opacity-20 hover:bg-dark-700 hover:shadow-md active:bg-dark-750">
+            <Avatar userId={result.user.id} className="size-7 mr-2" />
             <div className="text-bright font-semibold">
                 {result.user.username}
             </div>
