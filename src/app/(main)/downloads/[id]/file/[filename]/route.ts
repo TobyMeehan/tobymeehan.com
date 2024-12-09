@@ -25,7 +25,23 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 
     const file = dataResponse.data
 
-    const fileResponse = await fetch(file.url)
+    const range = parseRange(request.headers, file.size)
+
+    const headers = new Headers()
+
+    if (range.isRangeRequest) {
+        if (!range.isValid) {
+            const response = new NextResponse(null, { status: 416 })
+
+            response.headers.set("Content-Range", `bytes */${file.size}`)
+
+            return response
+        }
+
+        headers.set("Range", `bytes=${range.start}-${range.end}`)
+    }
+
+    const fileResponse = await fetch(file.url, { headers })
 
     if (fileResponse.status === 416) {
         return new Response(null, { status: 416 })
@@ -35,35 +51,17 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
         return new Response("Something went wrong...", { status: 500 })
     }
 
-    const data = await fileResponse.blob()
-
-    const range = parseRange(request.headers, file.size)
-
-    if (!range.isRangeRequest) {
-        const response = new NextResponse(data, { status: 200 })
-
-        response.headers.set("Content-Type", file.contentType)
-        response.headers.set("Content-Length", file.size.toString())
-        response.headers.set("Content-Disposition", `attachment;filename=${file.filename}`)
-        response.headers.set("Accept-Ranges", "bytes")
-
-        return response
-    }
-
-    if (!range.isValid) {
-        const response = new NextResponse(null, { status: 416 })
-
-        response.headers.set("Content-Range", `bytes */${file.size}`)
-
-        return response
-    }
-
-    const response = new NextResponse(data.slice(range.start, range.end), {status: 206})
+    const response = new NextResponse(fileResponse.body, { status: range.isRangeRequest ? 206 : 200 })
 
     response.headers.set("Content-Type", file.contentType)
-    response.headers.set("Content-Length", range.length.toString())
-    response.headers.set("Content-Range", `bytes ${range.start}-${range.end}/${file.size}`)
+    response.headers.set("Content-Length", file.size.toString())
     response.headers.set("Content-Disposition", `attachment;filename=${file.filename}`)
+
+    if (range.isRangeRequest) {
+        response.headers.set("Content-Range", `bytes ${range.start}-${range.end}/${file.size}`)
+    } else {
+        response.headers.set("Accept-Ranges", "bytes")
+    }
 
     return response
 }
