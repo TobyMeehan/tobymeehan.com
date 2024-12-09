@@ -2,35 +2,11 @@ import { auth } from "@/auth";
 import CommentSection from "@/components/downloads/comments/CommentSection";
 import DescriptionView from "@/components/downloads/DescriptionView";
 import { fetchDownloadById } from "@/data/downloads";
-import { Metadata, ResolvingMetadata } from "next";
 
-type Props = {
-    params: { id: string }
-}
-
-export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-    const result = await fetchDownloadById(params.id)
-
-    if (result.status !== "success") {
-        const parentMetadata = await parent
-
-        return {
-            title: parentMetadata.title
-        }
-    }
-
-    const download = result.download
-
-    return {
-        title: `${download.title} · tobymeehan.com`,
-        description: download.summary,
-    }
-}
-
-export default async function DownloadPage({ params }: Props) {
+export default async function DownloadPage({ params: { id } }: { params: { id: string } }) {
     const session = await auth()
 
-    const result = await fetchDownloadById(params.id, session ?? undefined)
+    const result = await fetchDownloadById(id, session ?? undefined)
 
     switch (result.status) {
         case "success":
@@ -52,6 +28,5 @@ export default async function DownloadPage({ params }: Props) {
                 </>
             )
     }
-
 
 }
