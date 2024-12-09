@@ -1,22 +1,37 @@
+import { auth } from "@/auth";
+import ClientDateTime from "@/components/ClientDateTime";
 import AuthorList from "@/components/downloads/AuthorList";
-import ManageOptions from "@/components/downloads/ManageOptions";
+import DownloadButton from "@/components/downloads/DownloadButton";
 import { fetchDownloadById } from "@/data/downloads";
 
 export default async function DownloadSidebar({ params }: { params: { id: string } }) {
-    const result = await fetchDownloadById(params.id)
+    const session = await auth()
+
+    const result = await fetchDownloadById(params.id, session)
 
     if (result.status === "success") {
         return (
             <>
+                <DownloadButton download={result.download} />
+
+                <hr className="my-5 border-dark-700" />
+
                 {result.download.summary}
 
-                <hr className="border-dark-700 my-3" />
+                <hr className="border-dark-700 my-5" />
 
-                <AuthorList downloadId={params.id} />
+                <div>
+                    <AuthorList downloadId={params.id} />
+                </div>
 
-                <hr className="border-dark-700 my-3" />
+                <hr className="border-dark-700 my-5" />
 
-                <ManageOptions download={result.download} />
+                <div className="text-lg text-center font-semibold">
+                    {result.download.updatedAt
+                        ? <>Updated <ClientDateTime dateTime={result.download.updatedAt} /></>
+                        : <>Created <ClientDateTime dateTime={result.download.createdAt} /></>
+                    }
+                </div>
             </>
         )
     }
