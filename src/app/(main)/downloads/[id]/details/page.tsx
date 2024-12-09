@@ -11,10 +11,6 @@ export default async function EditDownloadPage({ params }: { params: { id: strin
         case "success":
             return (
                 <>
-                    <h1 className="text-3xl font-light">Details</h1>
-
-                    <hr className="border-dark-700 my-5" />
-
                     <EditDownloadForm download={result.download} />
                 </>
             )

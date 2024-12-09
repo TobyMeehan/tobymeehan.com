@@ -8,7 +8,7 @@ type Props = {
     params: { id: string }
 }
 
-export async function generateMetadata({ params }: Props, parent: ResolvingMetadata):Promise<Metadata> {
+export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
     const result = await fetchDownloadById(params.id)
 
     if (result.status !== "success") {
@@ -38,11 +38,9 @@ export default async function DownloadPage({ params }: Props) {
                 <>
                     <h1 className="text-3xl font-light">{result.download.title}</h1>
 
-                    <hr className="border-dark-700 my-5" />
-
-                    <DescriptionView download={result.download} />
-
-                    <hr className="border-dark-700 my-5" />
+                    <div className="my-6">
+                        <DescriptionView download={result.download} />
+                    </div>
 
                     <CommentSection download={result.download} />
                 </>
@@ -50,11 +48,7 @@ export default async function DownloadPage({ params }: Props) {
         case "forbidden":
             return (
                 <>
-                    <h1 className="text-3xl font-light">Private</h1>
-
-                    <hr className="border-dark-700 my-5" />
-
-                    <p>This download is private.</p>
+                    <h1 className="text-2xl font-light">Private</h1>
                 </>
             )
     }

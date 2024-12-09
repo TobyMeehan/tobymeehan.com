@@ -3,6 +3,8 @@ import { fetchFilesByDownload } from "@/data/files";
 import { Download } from "@/models/Download";
 import FileModalButton from "./FileModalButton";
 import { Suspense } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
 
 export interface DownloadButtonProps {
     download: Download
@@ -26,6 +28,9 @@ async function DownloadButtonAsync({ download }: DownloadButtonProps) {
     }
 
     return (
-        <FileModalButton download={download} files={result.files} />
+        <FileModalButton download={download} files={result.files} className="w-full">
+            <FontAwesomeIcon icon={faDownload} className="mr-2" />
+            Download
+        </FileModalButton>
     )
 }

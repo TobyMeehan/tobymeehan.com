@@ -26,7 +26,7 @@ async function AuthorListAsync({ downloadId }: AuthorListProps) {
     if (result.status === "success") {
         return result.authors.map(author => {
             return (
-                <div key={author.id} className="my-3">
+                <div key={author.id} className="my-2">
                     <Suspense fallback={<AuthorSkeleton />}>
                         <AuthorListItem author={author} />
                     </Suspense>
@@ -53,8 +53,8 @@ async function AuthorListItem({ author }: { author: Author }) {
             return (
                 <UserLink user={result.user}
                     className="flex items-center p-2 rounded transition bg-opacity-20 hover:bg-dark-700 hover:shadow-md active:bg-dark-750">
-                    <Avatar userId={result.user.id} className="size-9 mr-2" />
-                    <span className="text-xl text-bright font-semibold">{result.user.username}</span>
+                    <Avatar userId={result.user.id} className="size-7 mr-2" />
+                    <span className="text-lg text-bright font-semibold">{result.user.username}</span>
                     {author.isOwner && <span className="ml-auto italic">Owner</span>}
                 </UserLink>
             )
