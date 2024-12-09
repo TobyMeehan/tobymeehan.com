@@ -1,11 +1,12 @@
 import { auth } from "@/auth"
 import { fetchAuthorsByDownload } from "@/data/authors"
-import { DateTime } from "luxon"
 import { Suspense } from "react"
 import UserInfo from "./UserInfo"
 import AuthorActionsForm from "./AuthorActionsForm"
 import Table from "@/components/tables/Table"
 import TableRow from "@/components/tables/TableRow"
+import AuthorizeView from "../authorization/AuthorizeView"
+import ClientDateTime from "@/components/ClientDateTime"
 
 export interface AuthorTableProps {
     downloadId: string
@@ -21,26 +22,30 @@ export default function AuthorTable({ downloadId }: AuthorTableProps) {
                 <th className="text-left py-5 font-bold">Actions</th>
             </>
         }>
-            <Suspense>
+            <Suspense fallback={<Loading />}>
                 <AuthorTableAsync downloadId={downloadId} />
             </Suspense>
         </Table>
     )
 }
 
+function Loading() {
+    return (
+        <tr>
+            <td className="p-4 text-center" colSpan={4}>Loading authors...</td>
+        </tr>
+    )
+}
+
 async function AuthorTableAsync({ downloadId }: AuthorTableProps) {
     const session = await auth()
-
-    if (!session) {
-        return null
-    }
 
     const result = await fetchAuthorsByDownload(downloadId, session)
 
     if (result.status !== "success") {
         return (
             <tr>
-                <td className="p-4 text-center">Could not load authors...</td>
+                <td className="p-4 text-center" colSpan={4}>Could not load authors...</td>
             </tr>
         )
     }
@@ -52,11 +57,13 @@ async function AuthorTableAsync({ downloadId }: AuthorTableProps) {
                     <UserInfo author={author} />
                 </td>
                 <td className="py-3">
-                    {DateTime.fromISO(author.createdAt).toRelative()}
+                    <ClientDateTime dateTime={author.createdAt} />
                 </td>
                 <td className="py-3">{author.isOwner ? <>Owner</> : <>Author</>}</td>
                 <td className="py-1.5">
-                    <AuthorActionsForm downloadId={downloadId} author={author} />
+                    <AuthorizeView downloadId={downloadId}>
+                        <AuthorActionsForm downloadId={downloadId} author={author} />
+                    </AuthorizeView>
                 </td>
             </TableRow>
         )

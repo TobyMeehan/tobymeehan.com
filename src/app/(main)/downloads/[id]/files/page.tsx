@@ -1,14 +1,11 @@
 import { auth } from "@/auth";
+import AuthorizeView from "@/components/downloads/authorization/AuthorizeView";
 import FileManager from "@/components/downloads/files/FileManager";
+import FileTable from "@/components/downloads/files/FileTable";
 import { fetchFilesByDownload } from "@/data/files";
-import { redirect } from "next/navigation";
 
 export default async function FilesPage({ params: { id } }: { params: { id: string } }) {
     const session = await auth()
-
-    if (!session) {
-        redirect("/downloads")
-    }
 
     const result = await fetchFilesByDownload(id, session)
 
@@ -20,7 +17,11 @@ export default async function FilesPage({ params: { id } }: { params: { id: stri
 
     return (
         <>
-            <FileManager downloadId={id} files={result.files} />
+            <AuthorizeView downloadId={id} notAuthorized={
+                <FileTable downloadId={id} files={result.files} />
+            }>
+                <FileManager downloadId={id} files={result.files} />
+            </AuthorizeView>
         </>
     )
 }

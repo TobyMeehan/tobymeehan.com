@@ -10,19 +10,19 @@ import DownloadFileButton from "./DownloadFileButton"
 export interface FileTableProps {
     downloadId: string
     files: DownloadFile[]
-    onFileDeleted: (file: DownloadFile) => void
-    onFileEdited: (file: DownloadFile) => void
+    onFileDeleted?: (file: DownloadFile) => void
+    onFileEdited?: (file: DownloadFile) => void
 }
 
 export default function FileTable({ downloadId, files, onFileEdited, onFileDeleted }: FileTableProps) {
     return (
         <Table>
             {files.length === 0 &&
-            <tr>
-                <td className="p-4 text-center" colSpan={4}>
-                    No files yet!
-                </td>
-            </tr>
+                <tr>
+                    <td className="p-4 text-center" colSpan={4}>
+                        No files yet!
+                    </td>
+                </tr>
             }
             {files.map(file => {
                 return (
@@ -41,10 +41,12 @@ export default function FileTable({ downloadId, files, onFileEdited, onFileDelet
                         </td>
                         <td className="py-1.5 px-3 space-x-5 text-right">
                             <DownloadFileButton downloadId={downloadId} file={file} />
-                            <EditFileButton downloadId={downloadId} file={file} onEdited={onFileEdited} />
-                            <DeleteFileButton downloadId={downloadId} file={file} onDeleted={() => {
-                                onFileDeleted(file)
-                            }} />
+                            {onFileEdited &&
+                                <EditFileButton downloadId={downloadId} file={file} onEdited={onFileEdited} />
+                            }
+                            {onFileDeleted &&
+                                <DeleteFileButton downloadId={downloadId} file={file} onDeleted={() => onFileDeleted(file)} />
+                            }
                         </td>
                     </TableRow>
                 )

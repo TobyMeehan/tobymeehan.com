@@ -27,13 +27,7 @@ function Skeleton() {
 }
 
 async function UserInfoAsync({ author }: UserInfoProps) {
-    const session = await auth()
-
-    if (!session) {
-        return <UnknownUser />
-    }
-
-    const result = await fetchUserById(author.id)
+     const result = await fetchUserById(author.id)
 
     if (result.status !== "success") {
         return <UnknownUser />

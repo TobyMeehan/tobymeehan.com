@@ -12,8 +12,9 @@ export default async function CommentSection({ download }: { download: Download 
         <>
             <h3 className="text-2xl mb-3">Comments</h3>
 
-            {session?.user?.id &&
-                <PostCommentForm userId={session.user.id} download={download} />
+            {session?.user?.id
+                ? <PostCommentForm userId={session.user.id} download={download} />
+                : <div>Login to comment</div>
             }
 
             <div className="mt-6 space-y-8">

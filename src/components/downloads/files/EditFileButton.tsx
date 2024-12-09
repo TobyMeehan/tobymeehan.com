@@ -1,3 +1,5 @@
+"use client"
+
 import IconButton from "@/components/IconButton"
 import { faPen } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
