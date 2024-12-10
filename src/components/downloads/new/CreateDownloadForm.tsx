@@ -5,6 +5,7 @@ import InputRadio from "@/components/forms/InputRadio"
 import InputText from "@/components/forms/InputText"
 import InputTextArea from "@/components/forms/InputTextArea"
 import SubmitButton from "@/components/forms/SubmitButton"
+import { faMarkdown } from "@fortawesome/free-brands-svg-icons"
 import { faEyeSlash, faGlobe, faLock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { redirect } from "next/navigation"
@@ -23,10 +24,10 @@ export default function CreateDownloadForm() {
                 {state.message}
             </div>
 
-            <div className="mb-3">
+            <div className="mb-3 xl:w-2/3 2xl:w-1/2">
                 <label htmlFor="title" className="block mb-1.5">Title</label>
 
-                <InputText id="title" name="title" required maxLength={40}
+                <InputText id="title" name="title" required maxLength={40} placeholder="My Epic Download"
                     valid={state.errors?.title?.length ?? 0 > 0 ? false : undefined} />
 
                 <span className="text-sm text-negative">
@@ -37,7 +38,7 @@ export default function CreateDownloadForm() {
             <div className="mb-3">
                 <label htmlFor="summary" className="block mb-1.5">Summary</label>
 
-                <InputText id="summary" name="summary" required maxLength={400}
+                <InputTextArea id="summary" name="summary" required maxLength={400} placeholder="What does it do? What is it for?"
                     valid={state.errors?.summary?.length ?? 0 > 0 ? false : undefined} />
 
                 <span className="text-sm text-negative">
@@ -48,10 +49,11 @@ export default function CreateDownloadForm() {
             <div className="mb-3">
                 <label htmlFor="description" className="block mb-1.5">
                     Description
-                    <div className="text-sm italic">Markdown supported!</div>
+                    <FontAwesomeIcon icon={faMarkdown} title="Markdown supported!" className="ml-2" />
                 </label>
 
                 <InputTextArea rows={10} id="description" name="description" required maxLength={4000}
+                    placeholder="How does it work? How do you install it? You can use *markdown* here."
                     valid={state.errors?.description?.length ?? 0 > 0 ? false : undefined} />
 
                 <span className="text-sm text-negative">

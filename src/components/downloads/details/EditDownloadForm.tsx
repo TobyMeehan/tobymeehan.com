@@ -6,9 +6,9 @@ import InputText from "@/components/forms/InputText";
 import InputTextArea from "@/components/forms/InputTextArea";
 import SubmitButton from "@/components/forms/SubmitButton";
 import { Download } from "@/models/Download";
+import { faMarkdown } from "@fortawesome/free-brands-svg-icons";
 import { faEyeSlash, faGlobe, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { redirect } from "next/navigation";
 import { useFormState } from "react-dom";
 
 export default function EditDownloadForm({ download }: { download: Download }) {
@@ -16,7 +16,7 @@ export default function EditDownloadForm({ download }: { download: Download }) {
 
     return (
         <form action={formAction}>
-            <div className="mb-3">
+            <div className="mb-3 xl:w-2/3 2xl:w-1/2">
                 <label htmlFor="title" className="block mb-1.5">Title</label>
 
                 <InputText id="title" name="title" defaultValue={download.title} required maxLength={40}
@@ -30,7 +30,7 @@ export default function EditDownloadForm({ download }: { download: Download }) {
             <div className="mb-3">
                 <label htmlFor="summary" className="block mb-1.5">Summary</label>
 
-                <InputText id="summary" name="summary" defaultValue={download.summary} required maxLength={400}
+                <InputTextArea id="summary" name="summary" defaultValue={download.summary} required maxLength={400}
                     valid={state.errors?.summary?.length ?? 0 > 0 ? false : undefined} />
 
                 <span className="text-sm text-negative">
@@ -39,7 +39,10 @@ export default function EditDownloadForm({ download }: { download: Download }) {
             </div>
 
             <div className="mb-3">
-                <label htmlFor="description" className="block mb-1.5">Description</label>
+                <label htmlFor="description" className="block mb-1.5">
+                    Description
+                    <FontAwesomeIcon icon={faMarkdown} title="Markdown supported!" className="ml-2" />
+                </label>
 
                 <InputTextArea rows={10} id="description" name="description" defaultValue={download.description} required maxLength={4000}
                     valid={state.errors?.description?.length ?? 0 > 0 ? false : undefined} />
@@ -49,7 +52,7 @@ export default function EditDownloadForm({ download }: { download: Download }) {
                 </span>
             </div>
 
-            <div className="mb-3">
+            <div className="mb-3 xl:w-2/3 2xl:w-1/2">
                 <label htmlFor="visibility" className="block mb-1.5">Visibility</label>
 
                 <InputDropdown id="visibility" name="visibility" defaultValue={download.visibility} options={[
@@ -84,7 +87,7 @@ export default function EditDownloadForm({ download }: { download: Download }) {
                 </span>
             </div>
 
-            <div className="mb-3">
+            <div className="mb-3 xl:w-2/3 2xl:w-1/2">
                 <label htmlFor="version" className="block mb-1.5">Current Version</label>
 
                 <InputText id="version" name="version" defaultValue={download.version}
