@@ -5,13 +5,20 @@ import { Suspense } from "react";
 
 export interface AvatarProps {
     userId: string
+    alt?: string
     className?: string
 }
 
-export default function Avatar({ className = "", ...props }: AvatarProps) {
+export default function Avatar({ userId, alt, className = "" }: AvatarProps) {
+    if (alt) {
+        return (
+            <AvatarImage userId={userId} alt={alt} className={className} />
+        )
+    }
+
     return (
         <Suspense fallback={<Skeleton className={className} />}>
-            <AvatarAsync className={className} {...props} />
+            <AvatarAsync className={className} userId={userId} />
         </Suspense>
     )
 }
@@ -32,7 +39,13 @@ async function AvatarAsync({ userId, className }: AvatarProps) {
     }
 
     return (
-        <Image src={`https://thavyra.xyz/api/users/${result.user.id}/avatar.png`} alt={`${result.user.username} Avatar`}
+        <AvatarImage userId={result.user.id} alt={`${result.user.username} Avatar`} className={className} />
+    )
+}
+
+function AvatarImage({userId, alt, className}: {userId: string, alt: string, className?: string}) {
+    return (
+        <Image src={`https://thavyra.xyz/api/users/${userId}/avatar.png`} alt={alt}
             width={500} height={500} className={`rounded-full ${className}`} />
     )
 }

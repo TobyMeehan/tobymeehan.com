@@ -1,25 +1,19 @@
 "use server"
 
-import { auth } from "@/auth";
-import { postBackend } from "@/data/fetch";
-import { Comment } from "@/models/Comment";
-import { revalidatePath } from "next/cache";
-import { z } from "zod";
+import { auth } from "@/auth"
+import { postBackend } from "@/data/fetch"
+import { revalidatePath } from "next/cache"
+import { z } from "zod"
+import { PostCommentState } from "./postDownloadComment"
+import { Comment } from "@/models/Comment"
 
-export interface PostCommentState {
-    result?: { status: "success", comment: Comment } | { status: "failed", message?: string }
-    errors?: {
-        content?: string[]
-    }
-}
-
-const PostCommentValidator = z.object({
+const ReplyValidator = z.object({
     content: z.string()
         .min(1, "Required")
         .max(400, "Too long!")
 })
 
-export async function postComment(downloadId: string, state: PostCommentState, formData: FormData): Promise<PostCommentState> {
+export async function reply(commentId: string, state: PostCommentState, formData: FormData): Promise<PostCommentState> {
     const session = await auth()
 
     if (!session) {
@@ -28,7 +22,7 @@ export async function postComment(downloadId: string, state: PostCommentState, f
         }
     }
 
-    const validationResult = PostCommentValidator.safeParse({
+    const validationResult = ReplyValidator.safeParse({
         content: formData.get("content")
     })
 
@@ -43,11 +37,11 @@ export async function postComment(downloadId: string, state: PostCommentState, f
 
     try {
 
-        const response = await postBackend<Comment>(`/downloads/${downloadId}/comments`, session, request)
+        const response = await postBackend<Comment>(`/comments/${commentId}/replies`, session, request)
 
         switch (response.status) {
             case 201:
-                revalidatePath(`/downloads/${downloadId}`)
+                revalidatePath(`/downloads/[slug]`, "page")
 
                 return {
                     result: {
@@ -65,7 +59,7 @@ export async function postComment(downloadId: string, state: PostCommentState, f
                 }
 
             default:
-                console.error(`Post comment request faulted: ${response.status}`)
+                console.error(`Reply requets faulted: ${response.status}`)
 
                 return {
                     result: { status: "failed", message: "Something went wrong..." }
@@ -77,7 +71,7 @@ export async function postComment(downloadId: string, state: PostCommentState, f
         console.error(error)
 
         return {
-            result: { status: "failed", message: "Failed to post comment." }
+            result: { status: "failed", message: "Failed to reply." }
         }
 
     }
