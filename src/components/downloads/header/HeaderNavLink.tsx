@@ -9,7 +9,7 @@ export interface HeaderNavLinkProps extends NavLinkProps {
 export default function HeaderNavLink({ children, icon, ...props }: HeaderNavLinkProps) {
     return (
         <NavLink className="group border-b-2" inactiveClassName="border-transparent" activeClassName="border-bright" {...props}>
-            <div className="mb-2 py-1 px-4 rounded transition group-hover:bg-dark-700 group-hover:text-bright">
+            <div className="mb-2 py-1 px-4 rounded transition group-hover:bg-dark-700 group-hover:text-bright text-nowrap">
                 {icon &&
                     <FontAwesomeIcon icon={icon} className="mr-2" />
                 }

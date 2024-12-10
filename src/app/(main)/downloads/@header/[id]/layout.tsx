@@ -5,7 +5,7 @@ import { faBook, faFolderOpen, faGear, faSliders, faUsers, faUsersGear } from "@
 
 export default function DownloadHeaderLayout({ params: { id } }: { params: { id: string } }) {
     return (
-        <div className="px-56">
+        <div className="mx-8">
             <HeaderNav>
                 <HeaderNavLink href={`/downloads/${id}`} icon={faBook}>
                     About

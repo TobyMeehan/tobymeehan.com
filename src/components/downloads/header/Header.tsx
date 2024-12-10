@@ -7,7 +7,7 @@ export default async function Header() {
     const session = await auth()
 
     return (
-        <div className="flex items-center ml-8 xl:mx-56">
+        <div className="flex items-center mx-8">
             <Link href={`/`} className="my-2">
                 <Image src={headerIcon} alt="tobymeehan.com"
                     className="size-9 rounded-full" />
