@@ -11,27 +11,27 @@ export default function DescriptionView({ download }: DescriptionViewProps) {
         <Markdown components={{
             h1(props) {
                 const { children } = props
-                return <h1 className="text-4xl font-bold">{children}</h1>
+                return <h1 className="text-3xl mb-3">{children}</h1>
             },
             h2(props) {
                 const { children } = props
-                return <h2 className="text-3xl font-bold">{children}</h2>
+                return <h2 className="text-2xl mb-3">{children}</h2>
             },
             h3(props) {
                 const { children } = props
-                return <h3 className="text-2xl font-bold">{children}</h3>
+                return <h3 className="text-xl mb-3">{children}</h3>
             },
             h4(props) {
                 const { children } = props
-                return <h4 className="text-xl font-bold">{children}</h4>
+                return <h4 className="text-lg mb-3">{children}</h4>
             },
             h5(props) {
                 const { children } = props
-                return <h5 className="text-lg font-bold">{children}</h5>
+                return <h5 className="font-extrabold mb-3">{children}</h5>
             },
             h6(props) {
                 const { children } = props
-                return <h6 className="font-bold">{children}</h6>
+                return <h6 className="font-bold mb-3">{children}</h6>
             },
             p(props) {
                 const { children } = props
@@ -49,7 +49,7 @@ export default function DescriptionView({ download }: DescriptionViewProps) {
             ul(props) {
                 const { children } = props
                 return (
-                    <ul className="list-disc ml-4">
+                    <ul className="list-disc ml-8 mb-3">
                         {children}
                     </ul>
                 )
