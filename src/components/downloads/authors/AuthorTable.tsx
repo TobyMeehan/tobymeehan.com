@@ -7,6 +7,7 @@ import Table from "@/components/tables/Table"
 import TableRow from "@/components/tables/TableRow"
 import AuthorizeView from "../authorization/AuthorizeView"
 import ClientDateTime from "@/components/ClientDateTime"
+import Spinner from "@/components/Spinner"
 
 export interface AuthorTableProps {
     downloadId: string
@@ -32,7 +33,10 @@ export default function AuthorTable({ downloadId }: AuthorTableProps) {
 function Loading() {
     return (
         <tr>
-            <td className="p-4 text-center" colSpan={4}>Loading authors...</td>
+            <td className="p-5 text-center" colSpan={4}>
+                <Spinner className="mr-2" />
+                Loading authors...
+            </td>
         </tr>
     )
 }

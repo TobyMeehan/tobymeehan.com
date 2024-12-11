@@ -6,10 +6,16 @@ import { Session } from "next-auth";
 import Avatar from "../users/Avatar";
 import { Suspense } from "react";
 import Link from "next/link";
+import Spinner from "../Spinner";
 
-export default  function UserDownloadList() {
+export default function UserDownloadList() {
     return (
-        <Suspense>
+        <Suspense fallback={
+            <div className="text-center">
+                <Spinner className="mr-2" />
+                Loading your downloads...
+            </div>
+        }>
             <UserDownloadListAsync />
         </Suspense>
     )
@@ -31,18 +37,31 @@ async function UserDownloadListAsync() {
     return result.downloads.map(download => {
         return (
             <div className="flex items-center my-2">
-                <Suspense>
+                <Suspense fallback={<ImageSkeleton />}>
                     <UserDownloadListItemImage session={session} download={download} />
                 </Suspense>
                 <Link href={`/downloads/${download.id}`} className="transition text-link hover:text-link-hover hover:underline">
                     {download.title}
                 </Link>
+                <span className="text-sm ml-2 font-light">
+                    {
+                        download.visibility === "public" ? <>Public</>
+                            : download.visibility === "unlisted" ? <>Unlisted</>
+                                : <>Private</>
+                    }
+                </span>
             </div>
         )
     })
 }
 
-async function UserDownloadListItemImage({session, download}: {session: Session, download: Download}) {
+function ImageSkeleton() {
+    return (
+        <div className="rounded-full bg-dark-700 size-5 mr-2 animate-pulse"></div>
+    )
+}
+
+async function UserDownloadListItemImage({ session, download }: { session: Session, download: Download }) {
     const result = await fetchAuthorsByDownload(download.id, session)
 
     if (result.status !== "success") {

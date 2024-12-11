@@ -1,6 +1,5 @@
 import AuthorTable from "@/components/downloads/authors/AuthorTable";
 import SearchUserForm from "@/components/downloads/authors/SearchUserForm";
-import { Suspense } from "react";
 
 export default function AuthorsPage({ params }: { params: { id: string } }) {
     return (
