@@ -2,6 +2,7 @@ import { auth, signIn, signOut } from "@/auth";
 import Image from "next/image";
 import Link from "next/link";
 import headerIcon from "./header-icon.png"
+import AuthStatus from "./AuthStatus";
 
 export default async function Header() {
     const session = await auth()
@@ -21,33 +22,7 @@ export default async function Header() {
                 Downloads
             </Link>
 
-            {session
-                ? <>
-                    <Image src={`https://thavyra.xyz/api/users/${session.user?.id}/avatar.png`} alt="Avatar"
-                        width={500} height={500} className="size-6 rounded-full ml-auto" />
-                    <div className="text-bright ml-1.5">
-                        Hi {session.user?.name}!
-                    </div>
-                    <form className="ml-2" action={async () => {
-                        "use server"
-                        await signOut()
-                    }}>
-                        <button type="submit">
-                            Logout
-                        </button>
-                    </form>
-                </>
-                : <>
-                    <form action={async () => {
-                        "use server"
-                        await signIn("thavyra")
-                    }} className="ml-auto">
-                        <button type="submit">
-                            Log In
-                        </button>
-                    </form>
-                </>
-            }
+            <AuthStatus />
         </div>
     )
 }

@@ -34,6 +34,14 @@ async function UserDownloadListAsync() {
         return null
     }
 
+    if (result.downloads.length === 0) {
+        return (
+            <div className="text-center">
+                Nothing to see here... yet!
+            </div>
+        )
+    }
+
     return result.downloads.map(download => {
         return (
             <div className="flex items-center my-2">
