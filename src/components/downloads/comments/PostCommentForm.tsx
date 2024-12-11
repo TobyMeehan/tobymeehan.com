@@ -18,7 +18,7 @@ export interface PostCommentFormProps {
     onSuccess?: () => void
 }
 
-export default function PostCommentForm({ id, action, userId, placeholder, submit, onCancel, onSuccess }: PostCommentFormProps) {
+export default function PostCommentForm({ id = "post-comment-content", action, userId, placeholder, submit, onCancel, onSuccess }: PostCommentFormProps) {
     const [state, formAction] = useFormState(action, {})
 
     const form = useRef<HTMLFormElement>(null)
@@ -31,11 +31,13 @@ export default function PostCommentForm({ id, action, userId, placeholder, submi
 
     return (
         <div className="flex">
-            <Avatar userId={userId} alt="Your Avatar" className="size-14 mr-3" />
+            <label htmlFor={id} className="size-14 mr-3">
+                <Avatar userId={userId} alt="Your Avatar" />
+            </label>
             <div className="grow">
                 <form action={formAction} ref={form}>
                     <div className="mb-2">
-                        <InputTextArea id={id ?? "post-comment-content"} name="content" required maxLength={400}
+                        <InputTextArea id={id} name="content" required maxLength={400}
                             placeholder={placeholder}
                             valid={state.result?.status === "failed" ? false : undefined} />
                         <span className="text-sm text-negative">

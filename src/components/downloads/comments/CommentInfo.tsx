@@ -21,7 +21,7 @@ export default async function CommentInfo({ parent, comment, recursion }: Commen
 
     return (
         <div className="flex my-8">
-            <Avatar userId={comment.userId} className="size-14 mr-3" />
+            <Avatar link userId={comment.userId} className="size-14 mr-3" />
             <div className="grow">
                 <div className="mb-1">
                     <Suspense>
@@ -56,13 +56,13 @@ async function CommentUsername({ comment }: { comment: Comment }) {
     }
 }
 
-async function Replies({comment, recursion}: CommentInfoProps) {
+async function Replies({ comment, recursion }: CommentInfoProps) {
     const session = await auth()
 
     const result = await fetchReplies(comment.id, session)
 
     if (result.status !== "success" || result.comments.length === 0) {
-     return null
+        return null
     }
 
     return result.comments.map(reply => {

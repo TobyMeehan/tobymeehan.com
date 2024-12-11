@@ -14,7 +14,7 @@ export default async function CommentSection({ download }: { download: Download 
             <h3 className="text-2xl mb-3">Comments</h3>
 
             {session?.user?.id
-                ? <PostCommentForm userId={session.user.id} placeholder="Post a comment" submit={"Comment"}
+                ? <PostCommentForm userId={session.user.id} placeholder="This is a cool download!" submit={"Comment"}
                     action={postDownloadComment.bind(null, download.id)} />
                 : <div>Login to comment</div>
             }
