@@ -5,6 +5,7 @@ import FileModalButton from "./FileModalButton";
 import { Suspense } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import Button from "../Button";
 
 export interface DownloadButtonProps {
     download: Download
@@ -12,9 +13,18 @@ export interface DownloadButtonProps {
 
 export default function DownloadButton(props: DownloadButtonProps) {
     return (
-        <Suspense>
+        <Suspense fallback={<DownloadButtonSkeleton />}>
             <DownloadButtonAsync {...props} />
         </Suspense>
+    )
+}
+
+export function DownloadButtonSkeleton() {
+    return (
+        <Button disabled className="w-full">
+            <FontAwesomeIcon icon={faDownload} className="mr-2" />
+            Download
+        </Button>
     )
 }
 

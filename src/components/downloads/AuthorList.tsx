@@ -12,9 +12,17 @@ export interface AuthorListProps {
 
 export default function AuthorList({ downloadId }: AuthorListProps) {
     return (
-        <Suspense>
+        <Suspense fallback={<AuthorListSkeleton />}>
             <AuthorListAsync downloadId={downloadId} />
         </Suspense>
+    )
+}
+
+export function AuthorListSkeleton() {
+    return (
+        <div className="my-2">
+            <AuthorSkeleton />
+        </div>
     )
 }
 
