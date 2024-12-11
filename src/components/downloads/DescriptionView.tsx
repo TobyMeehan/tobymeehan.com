@@ -53,6 +53,14 @@ export default function DescriptionView({ download }: DescriptionViewProps) {
                         {children}
                     </ul>
                 )
+            },
+            ol(props) {
+                const {children} = props
+                return (
+                    <ol className="list-decimal ml-8 mb-3">
+                        {children}
+                    </ol>
+                )
             }
         }}>
             {download.description}
