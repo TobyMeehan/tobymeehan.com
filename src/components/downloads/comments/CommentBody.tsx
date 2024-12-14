@@ -30,12 +30,16 @@ export default function CommentBody({ session, comment, replyToId }: CommentBody
         setMode("none")
     }
 
+    if (mode === "delete" && deleteState.result?.status === "success") {
+        setMode("none")
+    }
+
     switch (mode) {
         case "edit":
             return (
                 <form action={editFormAction}>
                     <div className="mb-1">
-                        <InputTextArea id={`${comment.id}-content`} name="content" required maxLength={400} defaultValue={editState.currentContent}
+                        <InputTextArea id={`${comment.id}-content`} name="content" required maxLength={400} defaultValue={comment.content}
                             valid={editState.result?.status === "failed" ? false : undefined} />
                         <span className="text-sm text-negative">
                             {editState.result?.status === "failed" && editState.result.message}
@@ -77,7 +81,7 @@ export default function CommentBody({ session, comment, replyToId }: CommentBody
             return (
                 <>
                     <div>
-                        {editState.currentContent}
+                        {comment.content}
                     </div>
                     <div className="space-x-3 mt-2">
                         {session &&

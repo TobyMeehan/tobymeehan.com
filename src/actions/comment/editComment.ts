@@ -3,6 +3,7 @@
 import { auth } from "@/auth"
 import { putBackend } from "@/data/fetch"
 import { Comment } from "@/models/Comment"
+import { revalidatePath } from "next/cache"
 import { z } from "zod"
 
 export interface EditCommentState {
@@ -49,6 +50,8 @@ export async function editComment(id: string, state: EditCommentState, formData:
 
         switch (response.status) {
             case 200:
+                revalidatePath(`/downloads/[id]`)
+
                 return {
                     currentContent: response.data.content,
                     result: { status: "success" }

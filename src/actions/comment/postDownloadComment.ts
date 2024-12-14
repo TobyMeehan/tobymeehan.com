@@ -41,7 +41,7 @@ export async function postDownloadComment(downloadId: string, state: PostComment
 
         switch (response.status) {
             case 201:
-                revalidatePath(`/downloads/${downloadId}`)
+                revalidatePath(`/downloads/[id]`)
 
                 return {
                     result: {
