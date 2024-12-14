@@ -6,13 +6,15 @@ import { postBackend } from "./data/fetch";
 declare module "next-auth" {
     interface Session {
         apiToken: string
+        error?: "TokenExpired"
     }
 }
 
 declare module "next-auth/jwt" {
     interface JWT {
-        apiToken: string,
-        expiresIn: number
+        apiToken: string
+        expiresAt: number
+        error?: "TokenExpired"
     }
 }
 
@@ -33,15 +35,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 scope: "openid account.profile.read"
             }
         },
-
-        async profile(profile) {
-
-            console.log(profile)
-
-
-
-            return { ...profile }
-        },
     }],
 
     callbacks: {
@@ -50,13 +43,20 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
             if (account) {
 
+                token.sub = account.providerAccountId
+
                 const response = await postBackend<{ token: string, expiresIn: number }>(`/token`, undefined, {
                     accessToken: account.access_token
                 })
 
                 if (response.status === 200) {
                     token.apiToken = response.data.token
+                    token.expiresAt = Date.now() + response.data.expiresIn * 1000
                 }
+            } else if (Date.now() < token.expiresAt) {
+                return token
+            } else {
+                token.error = "TokenExpired"
             }
 
             return token
@@ -65,7 +65,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         async session({ session, token }) {
 
+            session.user.id = token.sub!
             session.apiToken = token.apiToken
+            session.error = token.error
 
             return session
         },
