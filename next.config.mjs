@@ -9,6 +9,9 @@ const config = {
                 hostname: "thavyra.xyz",
                 port: "",
                 pathname: "/api/users/*/avatar.png"
+            },
+            {
+                hostname: "localhost"
             }
         ]
     }
