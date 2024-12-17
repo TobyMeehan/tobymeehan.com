@@ -45,7 +45,7 @@ export default function InputDropdown({ id, name, options, defaultValue }: Input
                             setShowDropdown(false)
                             setCurrentOption(option)
                         }}
-                            className="block w-full p-1 px-2 rounded transition hover:bg-dark-800 text-lg text-left">
+                            className="block w-full p-1 px-2 rounded transition hover:bg-dark-950 text-lg text-left">
                             {option.label}
                         </button>
                     )

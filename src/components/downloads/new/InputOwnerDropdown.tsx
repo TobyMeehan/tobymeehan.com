@@ -33,10 +33,10 @@ export default function InputOwnerDropdown({ id, currentUser }: InputOwnerDropdo
             </button>
             <div className={`${showDropdown ? "" : "hidden"} absolute w-full p-3 mt-2 space-y-1 rounded-lg overflow-hidden bg-dark-900 shadow-lg`}>
                 <button type="button" onClick={() => setShowDropdown(false)}
-                    className="block w-full p-1 px-2 rounded transition hover:bg-dark-800 text-lg text-left">
+                    className="block w-full p-1 px-2 rounded transition hover:bg-dark-950 text-lg text-left">
                     {currentUser}
                 </button>
-                <button type="submit" className="flex items-center w-full p-1 px-2 rounded transition hover:bg-dark-800 text-lg text-left">
+                <button type="submit" className="flex items-center w-full p-1 px-2 rounded transition hover:bg-dark-950 text-lg text-left">
                     <FontAwesomeIcon icon={faUserCircle} className="size-6 mr-2" />
                     Change account...
                 </button>
