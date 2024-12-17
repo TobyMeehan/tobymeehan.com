@@ -90,7 +90,7 @@ export default function EditDownloadForm({ download }: { download: Download }) {
             <div className="mb-3 xl:w-2/3 2xl:w-1/2">
                 <label htmlFor="version" className="block mb-1.5">Current Version</label>
 
-                <InputText id="version" name="version" defaultValue={download.version}
+                <InputText id="version" name="version" defaultValue={download.version ?? undefined}
                     valid={state.errors?.version?.length ?? 0 > 0 ? false : undefined} />
 
                 <span className="text-sm text-negative">
