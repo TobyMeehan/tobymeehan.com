@@ -40,8 +40,6 @@ export async function createDownload(state: CreateDownloadState, formData: FormD
         }
     }
 
-    console.log(session)
-
     const validationResult = CreateDownloadValidator.safeParse({
         title: formData.get("title"),
         summary: formData.get("summary"),
