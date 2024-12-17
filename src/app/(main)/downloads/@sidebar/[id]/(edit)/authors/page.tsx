@@ -1,3 +1,3 @@
-const AuthorsSidebar = () => <></>
+const AuthorsSidebar = () => null
 
 export default AuthorsSidebar
