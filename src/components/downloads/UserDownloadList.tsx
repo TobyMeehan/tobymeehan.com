@@ -51,7 +51,7 @@ async function UserDownloadListAsync() {
                 <Link href={`/downloads/${download.id}`} className="transition text-link hover:text-link-hover hover:underline">
                     {download.title}
                 </Link>
-                <span className="text-sm ml-2 font-light">
+                <span className="text-sm ml-auto font-light">
                     {
                         download.visibility === "public" ? <>Public</>
                             : download.visibility === "unlisted" ? <>Unlisted</>

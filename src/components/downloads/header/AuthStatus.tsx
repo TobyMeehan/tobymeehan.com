@@ -1,7 +1,7 @@
 import { auth, signIn, signOut } from "@/auth";
 import IconButton from "@/components/IconButton";
 import Avatar from "@/components/users/Avatar";
-import { faRightFromBracket, faRightToBracket, faSignOut, faUserCircle, faUserGear } from "@fortawesome/free-solid-svg-icons";
+import { faRightFromBracket, faRightToBracket, faUserCircle, faUserGroup } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default async function AuthStatus() {
@@ -31,7 +31,7 @@ export default async function AuthStatus() {
                 "use server"
                 await signIn("thavyra", {}, { prompt: "select_account" })
             }}>
-                <IconButton type="submit" icon={faUserGear} title="Change Account" />
+                <IconButton type="submit" icon={faUserGroup} title="Change Account" />
             </form>
             <form className="ml-1" action={async () => {
                 "use server"
