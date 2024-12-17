@@ -1,8 +1,8 @@
 import { fetchUserById } from "@/data/users";
-import { User } from "@/models/User";
 import Image from "next/image";
 import { Suspense } from "react";
 import UserLink from "./UserLink";
+import { env } from "next-runtime-env";
 
 export interface AvatarProps {
     userId: string
@@ -43,7 +43,7 @@ async function AvatarAsync({ userId, className, link }: AvatarProps) {
     if (!!link) {
         return (
             <UserLink user={result.user} className={className}>
-                <AvatarImage userId={result.user.id} alt={`${result.user.username} Avatar`} />
+                <AvatarImage userId={result.user.id} alt={`${result.user.username} Avatar`} className="w-full h-full" />
             </UserLink>
         )
     }
@@ -55,7 +55,7 @@ async function AvatarAsync({ userId, className, link }: AvatarProps) {
 
 function AvatarImage({userId, alt, className}: {userId: string, alt: string, className?: string}) {
     return (
-        <Image src={`https://thavyra.xyz/api/users/${userId}/avatar.png`} alt={alt}
+        <Image src={`${env("NEXT_PUBLIC_THAVYRA_URL")}/api/users/${userId}/avatar.png`} alt={alt}
             width={500} height={500} className={`rounded-full ${className}`} />
     )
 }

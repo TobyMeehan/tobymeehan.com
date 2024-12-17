@@ -1,4 +1,5 @@
 import { User } from "@/models/User";
+import { env } from "next-runtime-env";
 
 export async function fetchUserById(userId: string): Promise<{
     status: "success",
@@ -9,7 +10,7 @@ export async function fetchUserById(userId: string): Promise<{
     status: "failed"
 }> {
     try {
-        const response = await fetch(`https://thavyra.xyz/api/users/${userId}`)
+        const response = await fetch(`${env("NEXT_PUBLIC_THAVYRA_URL")}/api/users/${userId}`)
 
         if (response.status === 404) {
             return { status: "notfound" }

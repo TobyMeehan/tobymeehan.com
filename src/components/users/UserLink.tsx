@@ -1,4 +1,5 @@
 import { User } from "@/models/User";
+import { env } from "next-runtime-env";
 import Link from "next/link";
 import { AnchorHTMLAttributes } from "react";
 
@@ -9,6 +10,6 @@ export interface UserLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 export default function UserLink({user, href, ...props}: UserLinkProps) {
 
     return (
-        <Link href={`https://thavyra.xyz/@${user.username}`} {...props} />
+        <Link href={`${env("NEXT_PUBLIC_THAVYRA_URL")}/@${user.username}`} {...props} />
     )
 }
