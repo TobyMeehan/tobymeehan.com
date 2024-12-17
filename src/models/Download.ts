@@ -6,8 +6,8 @@ export type Download = {
     description: string
 
     visibility: "public" | "unlisted" | "private"
-    version: string
+    version: string | null
 
-    createdAt: string
+    createdAt: string | null
     updatedAt: string | null
 }
