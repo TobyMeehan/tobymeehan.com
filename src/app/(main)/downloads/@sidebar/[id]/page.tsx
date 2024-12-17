@@ -26,6 +26,12 @@ export default async function DownloadSidebar({ params }: { params: { id: string
 
                 <hr className="border-dark-700 my-5" />
 
+                {result.download.version &&
+                    <div className="text-center font-light">
+                        v{result.download.version}
+                    </div>
+                }
+
                 <div className="text-lg text-center font-semibold">
                     {result.download.updatedAt
                         ? <>Updated <ClientDateTime dateTime={result.download.updatedAt} /></>
