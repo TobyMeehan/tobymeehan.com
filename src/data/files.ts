@@ -1,5 +1,6 @@
 import { Session } from "next-auth";
 import { getBackend } from "./fetch";
+import { DownloadFile } from "@/models/File";
 
 export async function fetchFilesByDownload(downloadId: string, session?: Session | null): Promise<{
     status: "success",

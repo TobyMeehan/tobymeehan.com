@@ -3,6 +3,7 @@ import ModalHeader from "@/components/modal/ModalHeader"
 import EditFileForm from "./EditFileForm"
 import SubmitButton from "@/components/forms/SubmitButton"
 import ModalFooter from "@/components/modal/ModalFooter"
+import { DownloadFile } from "@/models/File"
 
 export interface EditFileModalProps {
     downloadId: string

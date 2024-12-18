@@ -2,6 +2,7 @@
 
 import { auth } from "@/auth"
 import { postBackend } from "@/data/fetch"
+import { DownloadFile } from "@/models/File"
 
 export interface CreateFileResult {
     result: { status: "success", file: DownloadFile & { uploadUrl: string } } | { status: "failed", message?: string }

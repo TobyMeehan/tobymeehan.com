@@ -26,7 +26,9 @@ export default function PostCommentForm({ id = "post-comment-content", action, u
     if (state.result?.status === "success") {
         form.current?.reset()
 
-        onSuccess && onSuccess()
+        if (onSuccess) {
+            onSuccess()
+        }
     }
 
     return (

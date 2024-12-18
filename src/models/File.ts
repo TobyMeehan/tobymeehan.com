@@ -1,4 +1,4 @@
-type DownloadFile = {
+export type DownloadFile = {
     id: string
     filename: string
     contentType: string

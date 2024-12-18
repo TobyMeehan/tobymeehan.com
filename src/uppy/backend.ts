@@ -22,7 +22,7 @@ export default class Backend<M extends Meta, B extends Body> extends BasePlugin<
     }
 
     completeUpload = async (files: string[]) => {
-        for (let fileId of files) {
+        for (const fileId of files) {
             const file = this.uppy.getFile(fileId)
 
             await completeFile(this.opts.downloadId, file.meta["x-id"] as string)
@@ -37,7 +37,9 @@ export default class Backend<M extends Meta, B extends Body> extends BasePlugin<
     uninstall(): void {
         const s3 = this.uppy.getPlugin("s3")
 
-        s3 && this.uppy.removePlugin(s3)
+        if (s3) {
+            this.uppy.removePlugin(s3)
+        }
 
         this.uppy.removePostProcessor(this.completeUpload)
     }
@@ -112,7 +114,7 @@ export default class Backend<M extends Meta, B extends Body> extends BasePlugin<
                 })
             },
 
-            async signPart(file, { uploadId, key, partNumber, signal }) {
+            async signPart(file, { uploadId, key, partNumber }) {
                 const [, fileId] = key.split('/')
 
                 const response = await signPart(downloadId, fileId, uploadId, partNumber)

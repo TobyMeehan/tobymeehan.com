@@ -4,7 +4,7 @@ import { auth } from "@/auth"
 import { postBackend } from "@/data/fetch"
 import { revalidatePath } from "next/cache"
 import { z } from "zod"
-import { PostCommentState } from "./postDownloadComment"
+import { PostCommentState } from "./PostCommentState"
 import { Comment } from "@/models/Comment"
 
 const ReplyValidator = z.object({

@@ -6,6 +6,7 @@ import InputFiles from "./InputFiles"
 import Uppy from "@uppy/core"
 import UploadTable from "./UploadTable"
 import Backend from "@/uppy/backend"
+import { DownloadFile } from "@/models/File"
 
 export interface FileManagerProps {
     downloadId: string

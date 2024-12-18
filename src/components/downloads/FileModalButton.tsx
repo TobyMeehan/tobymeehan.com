@@ -5,6 +5,7 @@ import Button, { ButtonProps } from "../Button"
 import { createPortal } from "react-dom"
 import FileModal from "./FileModal"
 import { Download } from "@/models/Download"
+import { DownloadFile } from "@/models/File"
 
 export interface FileModalButtonProps extends ButtonProps {
     download: Download

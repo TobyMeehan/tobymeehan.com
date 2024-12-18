@@ -1,4 +1,5 @@
 import IconLink from "@/components/IconLink"
+import { DownloadFile } from "@/models/File"
 import { faDownload } from "@fortawesome/free-solid-svg-icons"
 
 export interface DownloadFileButtonProps {

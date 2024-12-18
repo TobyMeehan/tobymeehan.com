@@ -78,7 +78,7 @@ export default function CreateDownloadForm() {
                     <FontAwesomeIcon icon={faEyeSlash} className="size-5" />
                     <label htmlFor="unlisted" className="grow hover:cursor-pointer">
                         Unlisted
-                        <p className="text-sm">Anyone with the link can see this download but it won't be shown on the front page.</p>
+                        <p className="text-sm">Anyone with the link can see this download but it won&apos;t be shown on the front page.</p>
                     </label>
                 </div>
 

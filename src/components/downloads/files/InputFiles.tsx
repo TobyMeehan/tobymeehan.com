@@ -82,9 +82,9 @@ export default function InputFiles({ uppy }: InputFilesProps) {
             </label>
 
 
-            {errors.map(error => {
+            {errors.map((error, i) => {
                 return (
-                    <div className="text-negative mt-3">
+                    <div key={i} className="text-negative mt-3">
                         <FontAwesomeIcon icon={faExclamationCircle} className="mr-2" />
                         <span>{error}</span>
                     </div>

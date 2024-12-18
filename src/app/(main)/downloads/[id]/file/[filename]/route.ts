@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
-import { getBackend, postBackend } from "@/data/fetch";
+import { postBackend } from "@/data/fetch";
+import { DownloadFile } from "@/models/File";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest, { params }: { params: { id: string, filename: string } }) {

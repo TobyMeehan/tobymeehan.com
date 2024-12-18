@@ -1,3 +1,4 @@
+import { DownloadFile } from "@/models/File"
 import { faFile, faFileAudio, faFileCode, faFileCsv, faFileExcel, faFileImage, faFilePdf, faFilePowerpoint, faFileText, faFileVideo, faFileWord, faFileZipper } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 

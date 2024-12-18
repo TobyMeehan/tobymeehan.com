@@ -56,7 +56,7 @@ async function AuthorTableAsync({ downloadId }: AuthorTableProps) {
 
     return result.authors.map(author => {
         return (
-            <TableRow>
+            <TableRow key={author.id}>
                 <td className="p-3">
                     <UserInfo author={author} />
                 </td>

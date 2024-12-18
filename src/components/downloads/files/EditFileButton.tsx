@@ -5,6 +5,7 @@ import { faPen } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 import { createPortal } from "react-dom"
 import EditFileModal from "./EditFileModal"
+import { DownloadFile } from "@/models/File"
 
 export interface EditFileButtonProps {
     downloadId: string

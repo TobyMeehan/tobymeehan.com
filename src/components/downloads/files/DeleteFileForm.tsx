@@ -1,4 +1,5 @@
 import { deleteFile } from "@/actions/file/deleteFile"
+import { DownloadFile } from "@/models/File"
 import { ReactNode } from "react"
 import { useFormState } from "react-dom"
 
@@ -22,7 +23,7 @@ export default function DeleteFileForm({ downloadId, file, submit, onDeleted }: 
                 <p className="mb-3">
                     Are you sure you want to delete{" "}
                     <span className="font-bold">{file.filename}</span>
-                    ? Once it's gone, it's gone!
+                    ? Once it&apos;s gone, it&apos;s gone!
                 </p>
                 {state.result?.status === "failed" &&
                     <div className="mb-3 text-negative">

@@ -1,12 +1,10 @@
-import { auth, signIn, signOut } from "@/auth";
+import { auth } from "@/auth";
 import Image from "next/image";
 import Link from "next/link";
 import headerIcon from "./header-icon.png"
 import AuthStatus from "./AuthStatus";
 
 export default async function Header() {
-    const session = await auth()
-
     return (
         <div className="flex items-center mx-8">
             <Link href={`/`} className="my-2">

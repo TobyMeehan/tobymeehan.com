@@ -6,6 +6,7 @@ import ClientDateTime from "@/components/ClientDateTime"
 import DeleteFileButton from "./DeleteFileButton"
 import EditFileButton from "./EditFileButton"
 import DownloadFileButton from "./DownloadFileButton"
+import { DownloadFile } from "@/models/File"
 
 export interface FileTableProps {
     downloadId: string

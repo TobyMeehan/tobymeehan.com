@@ -5,6 +5,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 import { createPortal } from "react-dom"
 import DeleteFileModal from "./DeleteFileModal"
+import { DownloadFile } from "@/models/File"
 
 export interface DeleteFileButtonProps {
     downloadId: string

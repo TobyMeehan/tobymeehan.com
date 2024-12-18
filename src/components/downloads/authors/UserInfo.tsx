@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import Avatar from "@/components/users/Avatar";
 import UserLink from "@/components/users/UserLink";
 import { fetchUserById } from "@/data/users";

@@ -2,6 +2,7 @@
 
 import { auth } from "@/auth"
 import { patchBackend } from "@/data/fetch"
+import { DownloadFile } from "@/models/File"
 import { revalidatePath } from "next/cache"
 import { z } from "zod"
 

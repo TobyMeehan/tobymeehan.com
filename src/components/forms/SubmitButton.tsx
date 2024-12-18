@@ -1,11 +1,7 @@
 import { useFormStatus } from "react-dom"
 import Button, { ButtonProps } from "../Button"
 
-interface SubmitButtonProps extends ButtonProps {
-
-}
-
-export default function SubmitButton({ children, type, disabled, ...props }: SubmitButtonProps) {
+export default function SubmitButton({ children, type, disabled, ...props }: ButtonProps) {
     const { pending } = useFormStatus()
 
     return (
