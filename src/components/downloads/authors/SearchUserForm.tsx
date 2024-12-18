@@ -3,7 +3,6 @@
 import { inviteAuthor } from "@/actions/author/inviteAuthor"
 import { searchUser, SearchUserResult } from "@/actions/author/searchUsers"
 import InputText from "@/components/forms/InputText"
-import SubmitButton from "@/components/forms/SubmitButton"
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"

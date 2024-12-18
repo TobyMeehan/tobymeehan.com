@@ -3,7 +3,7 @@ import Modal from "../modal/Modal";
 import ModalHeader from "../modal/ModalHeader";
 import FileIcon from "./files/FileIcon";
 import prettyBytes from "pretty-bytes";
-import ModalFooter from "../modal/ModalFooter";
+import { DownloadFile } from "@/models/File";
 
 export interface FileModalProps {
     show: boolean

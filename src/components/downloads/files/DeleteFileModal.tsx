@@ -3,6 +3,7 @@ import ModalHeader from "@/components/modal/ModalHeader"
 import DeleteFileForm from "./DeleteFileForm"
 import ModalFooter from "@/components/modal/ModalFooter"
 import SubmitButton from "@/components/forms/SubmitButton"
+import { DownloadFile } from "@/models/File"
 
 export interface DeleteFileModalProps {
     downloadId: string
@@ -20,13 +21,15 @@ export default function DeleteFileModal({ downloadId, file, show, setShow, onDel
             </ModalHeader>
             <DeleteFileForm downloadId={downloadId} file={file} onDeleted={() => {
                 setShow(false)
-                onDeleted && onDeleted()
+                if (onDeleted) {
+                    onDeleted()
+                }
             }}
-            submit={
-                <ModalFooter>
-                    <SubmitButton appearance="negative">Delete</SubmitButton>
-                </ModalFooter>
-            } />
+                submit={
+                    <ModalFooter>
+                        <SubmitButton appearance="negative">Delete</SubmitButton>
+                    </ModalFooter>
+                } />
         </Modal>
     )
 }

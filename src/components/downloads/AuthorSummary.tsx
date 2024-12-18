@@ -1,8 +1,6 @@
 import { fetchAuthorsByDownload } from "@/data/authors";
 import { Download } from "@/models/Download";
-import Image from "next/image";
 import { Suspense } from "react";
-import UserLink from "../users/UserLink";
 import Avatar from "../users/Avatar";
 
 export default function AuthorSummary({ download }: { download: Download }) {

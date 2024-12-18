@@ -1,5 +1,6 @@
 import { editFile } from "@/actions/file/editFile"
 import InputText from "@/components/forms/InputText"
+import { DownloadFile } from "@/models/File"
 import { ReactNode } from "react"
 import { useFormState } from "react-dom"
 

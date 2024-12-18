@@ -1,7 +1,7 @@
 "use server"
 
 import { auth } from "@/auth"
-import { getBackend, postBackend } from "@/data/fetch"
+import { postBackend } from "@/data/fetch"
 
 export type SignPartResult =
     | { status: "success", url: string }

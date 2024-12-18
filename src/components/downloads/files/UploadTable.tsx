@@ -1,9 +1,8 @@
 import Table from "@/components/tables/Table";
 import TableRow from "@/components/tables/TableRow";
 import Uppy from "@uppy/core";
-import FileIcon from "./FileIcon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamationCircle, faFile, faPause, faPauseCircle, faPlay, faRotateRight, faSpinner, faTriangleExclamation, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faExclamationCircle, faPause, faPauseCircle, faPlay, faRotateRight, faSpinner, faXmark } from "@fortawesome/free-solid-svg-icons";
 import IconButton from "@/components/IconButton";
 import useUppyState from "@uppy/react/lib/useUppyState.js"
 

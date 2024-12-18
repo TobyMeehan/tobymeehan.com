@@ -44,7 +44,7 @@ async function UserDownloadListAsync() {
 
     return result.downloads.map(download => {
         return (
-            <div className="flex items-center my-2">
+            <div key={download.id} className="flex items-center my-2">
                 <Suspense fallback={<ImageSkeleton />}>
                     <UserDownloadListItemImage session={session} download={download} />
                 </Suspense>

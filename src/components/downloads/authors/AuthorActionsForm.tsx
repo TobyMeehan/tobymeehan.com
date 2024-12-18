@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFormState } from "react-dom";
 
 export default function AuthorActionsForm({ downloadId, author }: { downloadId: string, author: Author }) {
-    const [kickState, kickAction] = useFormState(kickAuthor.bind(null, downloadId, author.id), {})
+    const [, kickAction] = useFormState(kickAuthor.bind(null, downloadId, author.id), {})
 
     return (
         <div>
