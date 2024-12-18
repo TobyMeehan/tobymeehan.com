@@ -16,11 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="box-border">
-      <body className={`antialiased`}>
 
         {children}
 
-      </body>
     </html>
   );
 }
