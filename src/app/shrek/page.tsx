@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Shrek from "./Shrek";
+import { env } from "next-runtime-env";
 
 export const metadata: Metadata = {
     title: "Shrek",
@@ -7,11 +8,12 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
+    const image = env("SHREK_IMAGE")
+    const audio = env("SHREK_AUDIO")
 
     return (
         <body>
-            <Shrek imageUrl={process.env.SHREK_IMAGE} audioUrl={process.env.SHREK_AUDIO} />
+            <Shrek imageUrl={image} audioUrl={audio} />
         </body>
     )
-
 }
